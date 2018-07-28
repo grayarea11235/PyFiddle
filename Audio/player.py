@@ -1,3 +1,4 @@
+import sys
 import gi
 
 gi.require_version('Gst', '1.0')
@@ -6,7 +7,9 @@ from gi.repository import Gst
 
 class Player:
     def __init__(self):
+        # player = Gst.ElementFactory.make("playbin", "player")
         self._player = Gst.ElementFactory.make("playbin", "player")
+        print(self._player)
         fakesink = Gst.ElementFactory.make("fakesink", "fakesink")
         self._player.set_property("video-sink", fakesink)
 
@@ -21,7 +24,10 @@ class Player:
         self._player.set_property("uri", "file://" + file)
 
     def play(self):
-        self._player.set_state(Gst.State.PLAYING)
+        ret = self._player.set_state(Gst.State.PLAYING)
+        if ret == Gst.StateChangeReturn.FAILURE:
+            print("ERROR: Unable to set the pipeline to the playing state")
+            sys.exit(1)
 
     def pause(self):
         self._player.set_state(Gst.State.PAUSED)

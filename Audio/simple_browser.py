@@ -11,61 +11,61 @@ url = ''
 
 # Main Canvas and Functions
 class Main(QtWidgets.QMainWindow):
- 
-	def __init__(self):
-		QtWidgets.QMainWindow.__init__(self)
-		self.CreateUI()
- 
-	def CreateUI(self):
- 		
- 		# Create Necessary Widgets 
-		self.centralwidget = QtWidgets.QWidget(self)
- 			
-		self.line = QtWidgets.QLineEdit(self)
-		self.line.setMinimumSize(500, 20)
-		self.line.setStyleSheet('font-size:15px;')
- 		
- 			# Enter URL
-		self.enter = QtWidgets.QPushButton(self)
-		self.enter.resize(0,0)
-		self.enter.clicked.connect(self.set_url)
-		self.enter.setShortcut('Return')
- 		
- 			# Reload Button
-		self.reload = QtWidgets.QPushButton('↻',self)
-		self.reload.setMinimumSize(20, 20)
-		self.reload.setShortcut('F5')
-		self.reload.setStyleSheet('font-size:23px;')
-		self.reload.clicked.connect(self.reload_page)
- 			
- 			# Back Button
-		self.back = QtWidgets.QPushButton('←',self)
-		self.back.setMinimumSize(20, 20)
-		self.back.setStyleSheet('font-size:23px;')
-		self.back.clicked.connect(self.go_back)
- 		
- 			# Forward Button
-		self.forward = QtWidgets.QPushButton('→',self)
-		self.forward.setMinimumSize(20, 20)
-		self.forward.setStyleSheet('font-size:23px;')
-		self.forward.clicked.connect(self.go_forwardard)
- 		
- 			# Create Progress Bar
-		self.pbar = QtWidgets.QProgressBar()
-		self.pbar.setMaximumWidth(120)
- 		
- 			# Update Progress Bar, Window Title etc.
-		self.web = QWebEngineView(loadProgress = self.pbar.setValue, loadFinished = self.pbar.hide, loadStarted = self.pbar.show, titleChanged = self.setWindowTitle)
-		self.web.setMinimumSize(1200, 600)
- 		
- 			# Check for url changes
-		self.web.urlChanged.connect(self.if_url_changed)
-		
-			# Check for user liink hovering
-		self.web.page().linkHovered.connect(self.if_link_hover)
- 		
- 			# Set Grid
-		grid = QtWidgets.QGridLayout()
+
+    def __init__(self):
+        QtWidgets.QMainWindow.__init__(self)
+        self.CreateUI()
+
+    def CreateUI(self):
+
+        # Create Necessary Widgets 
+        self.centralwidget = QtWidgets.QWidget(self)
+
+        self.line = QtWidgets.QLineEdit(self)
+        self.line.setMinimumSize(500, 20)
+        self.line.setStyleSheet('font-size:15px;')
+
+        # Enter URL
+        self.enter = QtWidgets.QPushButton(self)
+        self.enter.resize(0,0)
+        self.enter.clicked.connect(self.set_url)
+        self.enter.setShortcut('Return')
+
+        # Reload Button
+        self.reload = QtWidgets.QPushButton('↻',self)
+        self.reload.setMinimumSize(20, 20)
+        self.reload.setShortcut('F5')
+        self.reload.setStyleSheet('font-size:23px;')
+        self.reload.clicked.connect(self.reload_page)
+
+        # Back Button
+        self.back = QtWidgets.QPushButton('←',self)
+        self.back.setMinimumSize(20, 20)
+        self.back.setStyleSheet('font-size:23px;')
+        self.back.clicked.connect(self.go_back)
+
+        # Forward Button
+        self.forward = QtWidgets.QPushButton('→',self)
+        self.forward.setMinimumSize(20, 20)
+        self.forward.setStyleSheet('font-size:23px;')
+        self.forward.clicked.connect(self.go_forwardard)
+
+        # Create Progress Bar
+        self.pbar = QtWidgets.QProgressBar()
+        self.pbar.setMaximumWidth(120)
+
+        # Update Progress Bar, Window Title etc.
+        self.web = QWebEngineView(loadProgress = self.pbar.setValue, loadFinished = self.pbar.hide,         loadStarted = self.pbar.show, titleChanged = self.setWindowTitle)
+        self.web.setMinimumSize(1200, 600)
+
+        # Check for url changes
+        self.web.urlChanged.connect(self.if_url_changed)
+
+        # Check for user liink hovering
+        self.web.page().linkHovered.connect(self.if_link_hover)
+
+        # Set Grid
+        grid = QtWidgets.QGridLayout()
  
  			# Set Widget Locations
 		grid.addWidget(self.back,0,0, 1, 1)
