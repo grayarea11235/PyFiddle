@@ -4,6 +4,7 @@ import pickle
 import os.path
 import pprint
 import cmd2
+import logging
 
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -23,7 +24,7 @@ from tkinter import *
 SCOPES = [ 'https://www.googleapis.com/auth/drive.metadata.readonly', ]
 global service
 global cwd
-
+    
 class FileObject:
     pass
 
@@ -34,6 +35,8 @@ class GDriveFS:
 
 # Get the file files details from a object
 def gd_get_file_details(service, parent_id, file_name):
+    logging.info('ENTER gd_get_file_details')
+    
     results = service.files().list(
         q="""
         'root' in parents and trashed=false and
@@ -49,6 +52,7 @@ def gd_get_file_details(service, parent_id, file_name):
     print(ret_file.get('fileExtension'))
     print(ret_file.get('size'))
 
+    logging.info('EXIT gd_get_file_details')
     return results['files']
 
 
@@ -111,6 +115,7 @@ def init_service():
     
 
 def main():
+    logging.info('ENTER main')
     service = init_service()
     
     # Call the Drive v3 API
@@ -182,6 +187,8 @@ def main():
     gd_ls('/Devel/C', service)
     # gd_ls('/Devel/cpp/', service)
     # gd_ls('/aaa', service)
+
+    logging.info('EXIT main')
     
 
 def onselect(evt):
