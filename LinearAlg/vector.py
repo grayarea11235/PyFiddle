@@ -24,6 +24,13 @@ class Vector(object):
     def scale(self, s):
         return tuple(s*x for x in self.coordinates)
 
+    def mag(self):
+        pass
+
+    def norm(self):
+        pass
+
+
     def __str__(self):
         return 'Vector: {}'.format(self.coordinates)
 
