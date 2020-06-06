@@ -3,11 +3,13 @@ from trackinfo import TrackInfo
 from sqlite3 import OperationalError
 
 
+# A simple data store built on sqlite
 class Datastore:
 
     def __init__(self, name):
         self.name = name
 
+        
     def create_datastore(self):
         # Create a database in RAM
         # db = sqlite3.connect(':memory:')
@@ -49,6 +51,7 @@ class Datastore:
     def get_all_tracks(self):
         pass
 
+    
     def add_file(self, filename):
         ti = TrackInfo(filename)
         print(ti.genre)
