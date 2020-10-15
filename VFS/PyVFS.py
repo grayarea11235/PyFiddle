@@ -1,22 +1,25 @@
 import os
 from stat import S_ISDIR
 from cmd2 import Cmd
-import requests
+import argparse
+from cmd2 import with_argparser
 
+import requests
 
 class SimpleSh(Cmd):
     prompt = "life> "
     intro = "Welcome to the real world!"
-
+    
     def __init__(self):
         Cmd.__init__(self, use_ipython=True)
-
+        
     def do_hello(self, line):
         print('Hello')
 
     def do_ls(self, line):
         print(line)
 
+    @with_argparser(argparser)
     def do_status(self, line):
         if line:
             resp = requests.get(line)
@@ -28,8 +31,9 @@ class SimpleSh(Cmd):
 
 class VirtualFS():
     def __init__(self):
-        pass
-
+        self.cw = '/'
+        self.fs = []
+        
     def ls(self):
         pass
 
@@ -79,6 +83,7 @@ class FTPFS():
 class DropBoxFS():
     pass
 
+
 class GoogleDriveFS():
     pass
 
@@ -125,8 +130,8 @@ if __name__ == '__main__':
     vfs = VirtualFS()
     pfs = PhysicalFS('C:/Temp')
     files = pfs.ls('/')
-    for file in files:
-        print(file)
+#    for file in files:
+#        print(file)
 
     c = SimpleSh()
     c.cmdloop()
