@@ -25,7 +25,6 @@ class MainApp(wx.Frame):
 
 
 def main():
-
     app = wx.App()
     ex = MainApp(None)
     ex.Show()
