@@ -13,10 +13,11 @@ def get_file_size(url):
 
     return file_size
 
-def download_url(url):
+def download_url(url, file_n):
     print(url)
     
-    file_name = url.split('/')[-1]
+    #file_name = url.split('/')[-1]
+    file_name = file_n
 
     print(file_name)
     u = urlopen(url)
@@ -46,6 +47,7 @@ def download_url(url):
 def get_file_sizes():
     pass
 
+
 def compress_file(file_name):
     input = open(file_name, 'rb')
     s = input.read()
@@ -66,13 +68,18 @@ def main():
     #pprint.pprint(d['entries'][0]['links'][0]['href'])
 
     ents = d['entries']
+    num_ents = len(d['entries'])
+    print(num_ents)
     total = 0
     for ent in ents:
         #print(ent['links'][0]['href'])
         file_url = ent['links'][0]['href']
+        file_name = 'Harmontown-' + str(num_ents) + '-' + ent['title'] + '.mp3'
+        print(file_name)
 
-        file_size = get_file_size(file_url)
-        file_name, downloaded_size = download_url(file_url)
+        num_ents = num_ents - 1
+#        file_size = get_file_size(file_url)
+        file_name, downloaded_size = download_url(file_url, file_name)
 
 #        compress_file(file_name)
         
