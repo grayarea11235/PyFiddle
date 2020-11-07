@@ -58,7 +58,6 @@ def compress_file(file_name):
     print("Compress done")
 
 
-
 def main():
     print('In main')
     d = feedparser.parse(url)
@@ -95,5 +94,5 @@ def main():
     
 #    print(pprint.pprint(d))
     
-#if __name__ == '__main__':
-main()
+if __name__ == '__main__':
+    main()
