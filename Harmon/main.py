@@ -5,6 +5,11 @@ import gzip
 
 url = 'http://feeds.feedburner.com/HarmontownPodcast'
 #url = "http://download.thinkbroadband.com/10MB.zip"
+skeptics_guide_url = "https://feed.theskepticsguide.org/feed/rss.aspx?feed=sgu"
+
+class RssItemInfo:
+    pass
+
 
 def get_file_size(url):
     u = urlopen(url)
@@ -12,6 +17,7 @@ def get_file_size(url):
     file_size = int(meta['Content-Length'])
 
     return file_size
+
 
 def download_url(url, file_n):
     print(url)
@@ -60,6 +66,25 @@ def compress_file(file_name):
     print("Compress done")
 
 
+def get_report(rss_url):
+    feed = feedparser.parse(rss_url)
+
+    entries = feed['entries']
+    num_entries = len(feed['entries'])
+
+    print("num_entries = {num_entries}".format(num_entries = num_entries)) 
+   
+    rss_info = []
+
+    for entry in entries:
+        print(entry['title'])
+        file_url = entry['links'][0]['href']
+        print(file_url)
+        print(entry['description'])
+#        print(entry['pubDate'])
+        print(' -------------------------------------------------------------- ')
+
+
 def main():
     print('In main')
     d = feedparser.parse(url)
@@ -102,4 +127,6 @@ def main():
 #    print(pprint.pprint(d))
     
 if __name__ == '__main__':
-    main()
+    #get_report("http://feeds.feedburner.com/HarmontownPodcast")
+    get_report(skeptics_guide_url)
+    #main()

@@ -55,7 +55,7 @@ class Player(object):
 if __name__ == '__main__':
     p = Player()
 #    p.set_file('/home/cpd/Dev/Python/PyFiddle/Audio/Sherlock_06_The Sign of Four.mp3')
-    p.set_file('/home/cpd/Dev/Python/PyFiddle/Audio/mpthreetest.mp3')
+    p.set_file('/home/cpd/Devel/PyFiddle/Audio/mpthreetest.mp3')
     p.play()
     Gtk.main()
 
