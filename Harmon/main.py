@@ -3,7 +3,7 @@ import pprint
 from urllib.request import urlopen
 import gzip
 
-url = 'http://feeds.feedburner.com/HarmontownPodcast'
+harmontown_url = 'http://feeds.feedburner.com/HarmontownPodcast'
 #url = "http://download.thinkbroadband.com/10MB.zip"
 skeptics_guide_url = "https://feed.theskepticsguide.org/feed/rss.aspx?feed=sgu"
 
@@ -78,8 +78,11 @@ def get_report(rss_url):
 
     for entry in entries:
         print(entry['title'])
-        file_url = entry['links'][0]['href']
-        print(file_url)
+        
+        file_info = "File = {f} Length = {l} Type = {t}".format(f=entry['enclosures'][0].href, 
+                l=entry['enclosures'][0].length, t=entry['enclosures'][0].type)
+
+        print(file_info)
         print(entry['description'])
 #        print(entry['pubDate'])
         print(' -------------------------------------------------------------- ')
@@ -127,6 +130,6 @@ def main():
 #    print(pprint.pprint(d))
     
 if __name__ == '__main__':
-    #get_report("http://feeds.feedburner.com/HarmontownPodcast")
-    get_report(skeptics_guide_url)
+    get_report(harmontown_url)
+    #get_report(skeptics_guide_url)
     #main()
