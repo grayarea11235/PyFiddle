@@ -8,7 +8,12 @@ harmontown_url = 'http://feeds.feedburner.com/HarmontownPodcast'
 skeptics_guide_url = "https://feed.theskepticsguide.org/feed/rss.aspx?feed=sgu"
 
 class RssItemInfo:
-    pass
+    def __init__(self, title, description, href, type, length):
+        self.title = title
+        self.description = description
+        self.href = href 
+        self.type = type
+        self.length = length
 
 
 def get_file_size(url):
@@ -77,15 +82,26 @@ def get_report(rss_url):
     rss_info = []
 
     for entry in entries:
-        print(entry['title'])
+
+        new_info = RssItemInfo(entry['title'], entry['description'], entry['enclosures'][0].href, 
+                entry['enclosures'][0].type, entry['enclosures'][0].length)
+        rss_info.append(new_info)
+
+        #print(entry['title'])
         
         file_info = "File = {f} Length = {l} Type = {t}".format(f=entry['enclosures'][0].href, 
                 l=entry['enclosures'][0].length, t=entry['enclosures'][0].type)
 
-        print(file_info)
-        print(entry['description'])
+        #print(file_info)
+        #print(entry['description'])
 #        print(entry['pubDate'])
-        print(' -------------------------------------------------------------- ')
+        #print(' -------------------------------------------------------------- ')
+
+    rss_info.reverse()
+    i = 1
+    for info in rss_info:
+        print("{num} : {name} {href}".format(num = i, name = info.title, href = info.href))
+        i = i + 1
 
 
 def main():
@@ -130,6 +146,6 @@ def main():
 #    print(pprint.pprint(d))
     
 if __name__ == '__main__':
-    get_report(harmontown_url)
-    #get_report(skeptics_guide_url)
+#    get_report(harmontown_url)
+    get_report(skeptics_guide_url)
     #main()
