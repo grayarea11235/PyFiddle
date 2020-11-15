@@ -2,6 +2,8 @@ import operator
 from math import sqrt, acos, pi
 from decimal import Decimal, getcontext
 
+
+# This class was developed while doing the Udacity linear algerbra refresher free course.
 class Vector(object):
     def __init__(self, coordinates):
         try:

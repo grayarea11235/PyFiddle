@@ -2,6 +2,8 @@ import feedparser
 import pprint
 from urllib.request import urlopen
 import gzip
+import curses
+
 
 harmontown_url = 'http://feeds.feedburner.com/HarmontownPodcast'
 #url = "http://download.thinkbroadband.com/10MB.zip"
