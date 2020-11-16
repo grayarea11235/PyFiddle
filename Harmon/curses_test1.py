@@ -1,5 +1,11 @@
 import sys,os
 import curses
+from main import get_report
+
+
+def get_rss_list():
+    the_url = 'http://feeds.feedburner.com/HarmontownPodcast'
+
 
 def draw_menu(stdscr):
     k = 0
@@ -13,7 +19,7 @@ def draw_menu(stdscr):
     # Start colors in curses
     curses.start_color()
     curses.init_pair(1, curses.COLOR_CYAN, curses.COLOR_BLACK)
-    curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)
+    curses.init_pair(2, curses.COLOR_GREEN, curses.COLOR_BLACK)
     curses.init_pair(3, curses.COLOR_BLACK, curses.COLOR_WHITE)
 
     # Loop where k is the last character pressed
