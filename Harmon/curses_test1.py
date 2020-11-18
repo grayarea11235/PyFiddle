@@ -1,6 +1,6 @@
 import sys,os
 import curses
-from main import get_report
+from rss_util import get_report
 
 
 def get_rss_list():
