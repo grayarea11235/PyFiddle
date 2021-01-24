@@ -1,0 +1,6 @@
+Things to install
+
+pip3 install cmd2
+pip3 install google-api-python-client
+pip3 install google-auth-oauthlib
+pip3 install prettytable
