@@ -1,5 +1,5 @@
 export XDG_SESSION_TYPE=wayland
 
 
- Weird cmd2 problem : 
+Weird cmd2 problem : 
 https://stackoverflow.com/questions/64989221/xdg-session-type-error-on-devstack-installation
