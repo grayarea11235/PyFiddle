@@ -3,6 +3,29 @@ import sqlite3
 from sqlite3 import Error
 
 def create_datastore(name):
+    
+    conn = None
+    
+    try:
+        conn = sqlite3.connect(name)
+        print(sqlite3.version)
+
+
+        sql_files_table = """ CREATE TABLE IF NOT EXISTS projects (
+                                        id integer PRIMARY KEY,
+                                        name text NOT NULL,
+                                        begin_date text,
+                                        end_date text
+                                    ); """
+
+    except Error as e:
+        print(e)
+    finally:
+        if conn:
+            conn.close()
+
+
+def add_entry(entry):
     pass
 
 
