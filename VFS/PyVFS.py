@@ -6,18 +6,26 @@ from cmd2 import with_argparser
 
 import requests
 
+argparser = argparse.ArgumentParser()
+
 class SimpleSh(Cmd):
-    prompt = "life> "
+    prompt = "lsh> "
     intro = "Welcome to the real world!"
     
     def __init__(self):
         Cmd.__init__(self, use_ipython=True)
         
+
+    def do_exit(self, line):
+        pass
+
     def do_hello(self, line):
         print('Hello')
 
     def do_ls(self, line):
         print(line)
+        if line == '':
+            print('No line... default to cwd')
 
     @with_argparser(argparser)
     def do_status(self, line):
