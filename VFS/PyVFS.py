@@ -3,29 +3,75 @@ from stat import S_ISDIR
 from cmd2 import Cmd
 import argparse
 from cmd2 import with_argparser
+import json
+import sys
 
 import requests
+
+test_config = '''
+    {
+        "drives": [
+            {
+                "Name": "C",
+                "Type": "Drive",
+                "Path": "C:" 
+            },
+            {
+                "Name": "Temp",
+                "Type": "Drive", 
+                "Path": "C:\\temp"
+            }, 
+            {
+                "Name": "Env",
+                "Type": "OS",
+                "Path": "@environment"
+            },
+            {
+                "Name": "Procs",
+                "Type": "OS",
+                "Path": "@processes"
+            }
+        ]         
+    }
+'''
+
 
 argparser = argparse.ArgumentParser()
 
 class SimpleSh(Cmd):
     prompt = "lsh> "
     intro = "Welcome to the real world!"
+ 
     
     def __init__(self):
         Cmd.__init__(self, use_ipython=True)
-        
+
+        self.virtual_fs = VirtualFS()
+ 
 
     def do_exit(self, line):
-        pass
+        print('Bye')
+        sys.exit()
+
 
     def do_hello(self, line):
         print('Hello')
+
+
+    def do_cd(self, line):
+        pass
+
+    def do_pwd(self, line):
+        print(self.virtual_fs.cwd)
+
 
     def do_ls(self, line):
         print(line)
         if line == '':
             print('No line... default to cwd')
+            print(self.virtual_fs.cwd)
+            self.virtual_fs.ls(self.cwd)
+
 
     @with_argparser(argparser)
     def do_status(self, line):
@@ -39,10 +85,12 @@ class SimpleSh(Cmd):
 
 class VirtualFS():
     def __init__(self):
-        self.cw = '/'
-        self.fs = []
+        self.cwd = '/'
+        #self.fs = []
+        self.fs = json.loads(test_config)
+        print(self.fs)
         
-    def ls(self):
+    def ls(self, path):
         pass
 
     def mount(self, fs):

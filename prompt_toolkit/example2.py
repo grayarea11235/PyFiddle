@@ -1,11 +1,4 @@
-from prompt_toolkit import PromptSession
-from prompt_toolkit.lexers import PygmentsLexer
 from pygments.lexers.sql import SqlLexer
-
-
-class Cmd:
-    pass
-
 
 def main():
     session = PromptSession(lexer=PygmentsLexer(SqlLexer))
