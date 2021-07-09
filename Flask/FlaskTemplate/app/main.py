@@ -4,7 +4,6 @@ from app_system_info import AppSystemInfo
 
 import logging
 
-
 import flask
 from flask import Flask
 from flask import render_template
@@ -21,6 +20,10 @@ def flask_info():
 
     return render_template('info.html', system_info=system_info)
 
+
+@app.route('/base')
+def do_base():
+    return render_template('base.html')
 
 @app.route('/')
 def hello_world():
