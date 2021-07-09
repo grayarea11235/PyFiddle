@@ -26,7 +26,9 @@ class AppSystemInfo:
         self.properties['platform_version'] = platform.version()
         self.properties['platform_node'] = platform.node()
         self.properties['platform_processor'] = platform.processor()
-
+        
+        self.properties['platform_release'] = platform.release()
+        self.properties['platform_system'] = platform.system()
 
 @app.route('/info')
 def flask_info():
