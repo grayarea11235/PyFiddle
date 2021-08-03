@@ -1,17 +1,16 @@
-import sys
-import platform
-from app_system_info import AppSystemInfo
-
 import logging
-
 import flask
+
 from flask import Flask
 from flask import render_template
+
+from app_system_info import AppSystemInfo
 
 
 app = Flask(__name__)
 
 logging.basicConfig(filename='logfile.log', level=logging.INFO)
+
 
 @app.route('/info')
 def flask_info():
@@ -24,6 +23,7 @@ def flask_info():
 @app.route('/base')
 def do_base():
     return render_template('base.html')
+
 
 @app.route('/')
 def hello_world():
