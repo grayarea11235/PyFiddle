@@ -1,8 +1,8 @@
 from PIL import Image
 
+
 def double_image_nn():
     input_image = Image.open('./images/NeptuneGrayScale.tif')
-    
     input_size_x = input_image.size[0]
     input_size_y = input_image.size[1]
 
@@ -11,7 +11,9 @@ def double_image_nn():
     for x in range(input_size_x):
         for y in range(input_size_y):
             v = input_image.getpixel((x, y))
-            print('{},{} = {}'.format(x, y, v))
+            print('({},{}) = {}'.format(x, y, v))
+
+            #output_image.setpixel((x, y), (255, 255, 255))
 
 
 def load_image():
