@@ -2,6 +2,7 @@ from PIL import Image
 
 
 def double_image_nn():
+    ''' Zoom an image by two using simple nearest neighbour '''
     input_image = Image.open('./images/NeptuneGrayScale.tif')
     input_size_x = input_image.size[0]
     input_size_y = input_image.size[1]
