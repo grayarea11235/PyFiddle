@@ -30,13 +30,13 @@ def double_image_nn():
 
 def load_image():
     """Test the loading of an image."""
-    im = Image.open('./images/NeptuneGrayScale.tif')
-    print(im.format, im.size, im.mode)
-    print(im.size[0], im.size[1])
-    for x in range(im.size[0]):
-        print("{}:{}".format(x, im.getpixel((x, 200))))
-    print(im.getpixel((200, 200)))
-    im.show()
+    input_image = Image.open('./images/NeptuneGrayScale.tif')
+    print(input_image.format, input_image.size, input_image.mode)
+    print(input_image.size[0], input_image.size[1])
+    for x in range(input_image.size[0]):
+        print("{}:{}".format(x, input_image.getpixel((x, 200))))
+    print(input_image.getpixel((200, 200)))
+    input_image.show()
 
 
 def test_image_create():
@@ -46,6 +46,7 @@ def test_image_create():
 
 
 def main():
+    load_image()
     double_image_block('./images/NeptuneGrayScale.tif')
     double_image_nn()
 
