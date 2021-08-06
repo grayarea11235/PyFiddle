@@ -16,15 +16,16 @@ def collatz(n, res):
 
 
 def main():
-    with open('output.csv', 'w', newline='')as csvfile:  
-        csvwriter = csv.writer(csvfile, delimiter=' ',
+    with open('output.csv', 'w', newline='\n')as csvfile:  
+        csvwriter = csv.writer(csvfile, delimiter=',',
                                 quotechar='|', quoting=csv.QUOTE_MINIMAL)
-        res = list()
+        res = [] 
 
         for n in range(1000):
             collatz(n+1, res)
             print(res)
             csvwriter.writerow(res)
+            res = []
 
 
 if __name__ == '__main__':
