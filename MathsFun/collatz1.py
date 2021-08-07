@@ -17,7 +17,7 @@ def collatz(n, res):
 def main():
     with open('output.csv', 'w', newline='\n')as csvfile:  
         csvwriter = csv.writer(csvfile, delimiter=',',
-                                quotechar='|', quoting=csv.QUOTE_MINIMAL)
+                quotechar='|', quoting=csv.QUOTE_MINIMAL)
         res = []
 
         for number in range(1, 1000):
