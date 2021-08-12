@@ -4,7 +4,7 @@ import cmd2
 
 
 class ObjShell(cmd2.Cmd):
-    """The command processor"""
+    """The command processor."""
     #def __init__(self):
     #    pass
 
@@ -15,13 +15,13 @@ class ObjShell(cmd2.Cmd):
 
 
     def do_dir(self, args):
-        print(args)
         dir_ents = dir(args)
         for ent in dir_ents:
             self.poutput(ent)
 
 
 def main():
+    """Main entry point."""
     app = ObjShell()
     app.cmdloop()
     #os.sys.exit(app.cmdloop())
