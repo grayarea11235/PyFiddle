@@ -29,9 +29,9 @@ def create_database(name):
                 conn.close()
 
 
-def file_entry_exisits(conn):
-    pass
-
+def file_entry_exisits(conn, search_name):
+    sql_str = """ SELECT id FROM files WHERE full_path = ? """
+    
 
 def add_entry(db_name, conn, entry):
     """
