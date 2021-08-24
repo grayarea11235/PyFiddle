@@ -25,6 +25,11 @@ class MyTree(wx.TreeCtrl):
                 self.AppendItem(new_item, dir_entry)
 
 
+def dump_wx_event(event):
+    print(dir(event))
+    print(event.GetTimestamp())
+
+
 class MainApp(wx.Frame):
     def __init__(self, *args, **kwargs):
         super(MainApp, self).__init__(*args, **kwargs)
@@ -92,6 +97,8 @@ class MainApp(wx.Frame):
 
     def OnSelChanged(self, event):
         '''Method called when selected item is changed.'''
+        dump_wx_event(event)
+
         # Get the selected item object
         item =  event.GetItem()
         item_text = self.tree.GetItemText(item)
