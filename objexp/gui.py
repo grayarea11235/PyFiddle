@@ -1,10 +1,14 @@
 import wx
+from wx import Menu
+from wx import MenuBar
+from wx import TreeCtrl
+from wx import Frame
 import os
 
 
-class MyTree(wx.TreeCtrl):
+class MyTree(TreeCtrl):
     def __init__(self, parent, id, position, size, style):
-        wx.TreeCtrl.__init__(self, parent, id, position, size, style)
+        TreeCtrl.__init__(self, parent, id, position, size, style)
 
         self.refresh_tree()
     
@@ -13,7 +17,7 @@ class MyTree(wx.TreeCtrl):
         self.DeleteAllItems()
 
         root = self.AddRoot('Stuff')
-        #self.SetPyData(root, ('key', 'value'))
+        self.SetPyData(root, ('key', 'value'))
         self.mods = self.AppendItem(root, 'Modules')
 
         modules = os.sys.modules
@@ -26,29 +30,34 @@ class MyTree(wx.TreeCtrl):
 
 
 def dump_wx_event(event):
+    """Dump the contents of a wx Event object."""
     print(dir(event))
     print(event.GetTimestamp())
 
 
-class MainApp(wx.Frame):
+class MainApp(Frame):
     def __init__(self, *args, **kwargs):
         super(MainApp, self).__init__(*args, **kwargs)
 
         self.initUI()
 
 
-    def initUI(self):
-        menubar = wx.MenuBar()
-        fileMenu = wx.Menu()
-        #fileItem = fileMenu.Append(wx.ID_EXIT, 'Quit', 'Quit application')
-        fileItem = fileMenu.Append(wx.ID_EXIT, 'Quit', 'Quit application')
-        menubar.Append(fileMenu, '&File')
-        self.SetMenuBar(menubar)
+    def config_menu(self):
+        '''Here we configure the main windows menu'''
+        menu_bar = MenuBar()
+        file_menu = Menu()
+        self.file_item = file_menu.Append(wx.ID_EXIT, 'Quit', 'Quit application')
+        menu_bar.Append(file_menu, '&File')
+        self.SetMenuBar(menu_bar)
 
-        self.Bind(wx.EVT_MENU, self.OnQuit, fileItem)
+        self.Bind(wx.EVT_MENU, self.OnQuit, self.file_item)
+
+
+    def initUI(self):
+        self.config_menu()
 
         # Create a splitter window
-        self.splitter = wx.SplitterWindow(self, -1)
+        self.splitter = wx.SplitterWindow(self)
 
         # Create the left panel
         leftPanel = wx.Panel(self.splitter, -1)
