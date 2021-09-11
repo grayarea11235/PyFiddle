@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 # Utility to send notes, urls, files etc to a email.
 # Just using SMTP
 
@@ -11,6 +13,9 @@ import mimetypes
 
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+from email.mime.image import MIMEImage
+from email.mime.audio import MIMEAudio
 
 # Command format
 #   send2mail -f <file>
@@ -65,7 +70,7 @@ def create_message_with_attachment(
 
     content_type, encoding = mimetypes.guess_type(file)
 
-    print(content_type)
+    print("content_type = {} encoding = {}".format(content_type, encoding))
 
     if content_type is None or encoding is not None:
         content_type = 'application/octet-stream'
