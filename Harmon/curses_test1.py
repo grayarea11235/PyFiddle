@@ -1,12 +1,16 @@
-import sys,os
+import os
 import curses
 from rss_util import get_report
+import feedparser
 
 
 def get_rss_list():
     the_url = 'http://feeds.feedburner.com/HarmontownPodcast'
+    
+    d = feedparser.parse(the_url)
+    return d['feed']['title']
 
-
+    
 def draw_menu(stdscr):
     k = 0
     cursor_x = 0
@@ -73,6 +77,8 @@ def draw_menu(stdscr):
         stdscr.attron(curses.A_BOLD)
 
         # Rendering title
+        stdscr.addstr(1, 0, 'This is my text!')
+        stdscr.addstr(2, 0, get_rss_list())
         stdscr.addstr(start_y, start_x_title, title)
 
         # Turning off attributes for title

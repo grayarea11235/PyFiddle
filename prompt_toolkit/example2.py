@@ -1,5 +1,3 @@
-from prompt_toolkit import PromptSession
-from prompt_toolkit.lexers import PygmentsLexer
 from pygments.lexers.sql import SqlLexer
 
 def main():
@@ -17,6 +15,7 @@ def main():
             if text == 'q':
                 break
     print('GoodBye!')
+
 
 if __name__ == '__main__':
     main()
