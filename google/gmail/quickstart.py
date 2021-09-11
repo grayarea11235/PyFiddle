@@ -1,7 +1,6 @@
-#from __future__ import print_function
-
 import os.path
 import base64
+import urllib
 
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -11,7 +10,7 @@ from google.oauth2.credentials import Credentials
 from email.mime.text import MIMEText
 
 # If modifying these scopes, delete the file token.json.
-SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
+SCOPES = ['https://www.googleapis.com/auth/gmail.readonly', 'https://www.googleapis.com/auth/gmail.compose']
 
 
 def create_message(sender, to, subject, message_text):
@@ -30,8 +29,9 @@ def create_message(sender, to, subject, message_text):
     message['to'] = to
     message['from'] = sender
     message['subject'] = subject
-
-    return {'raw': base64.urlsafe_b64encode(message.as_string())}
+    
+    return {'raw': base64.urlsafe_b64encode(message.as_bytes()).decode()}
+ 
 
 
 def create_message_with_attachment(
@@ -86,7 +86,7 @@ def create_message_with_attachment(
     msg.add_header('Content-Disposition', 'attachment', filename=filename)
     message.attach(msg)
 
-    return {'raw': base64.urlsafe_b64encode(message.as_string())}
+    return {'raw': base64.urlsafe_b64encode(message.as_string().as_bytes()).decode()}
 
 
 def authenticate():
@@ -124,14 +124,57 @@ def gmail_list_labels(creds):
         print('No labels found.')
     else:
         print('Labels:')
+        result = []
         for label in labels:
             print(label['name'])
+            result.append(label['name'])
+
+    return result
+
+
+def send_message(service, user_id, message):
+    """Send an email message.
+
+    Args:
+        service: Authorized Gmail API service instance.
+        user_id: User's email address. The special value "me"
+        can be used to indicate the authenticated user.
+        message: Message to be sent.
+
+    Returns:
+        Sent Message.
+    """
+    
+    try:
+        message = (service.users().messages().send(userId=user_id, body=message)
+                    .execute())
+        print('Message Id: {}'.format(message['id']))
+        return message
+    
+    except error.HttpError as error:
+        print('An error occurred: %s'.format(error))
+
+
+def send_test_message():
+    msg = create_message(sender='ciaran.dunn@gmail.com', 
+            to='ciaran.dunn@gmail.com', subject='Test Email Message', 
+            message_text='This is a test email message via the gmail API.')
+
+
+    print(msg)
+
+    creds = authenticate()
+    service = build('gmail', 'v1', credentials=creds)
+
+    send_message(service=service, user_id='ciaran.dunn@gmail.com', message=msg)
 
 
 def main():
     creds = authenticate()
     gmail_list_labels(creds)
- 
+
+    #send_test_message()
+
 
 if __name__ == '__main__':
     main()
