@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # Utility to send notes, urls, files etc to a email.
 # Just using SMTP
@@ -10,6 +10,7 @@ import smtplib
 import config
 import base64
 import mimetypes
+import email.encoders
 
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -92,6 +93,7 @@ def create_message_with_attachment(
         fp = open(file, 'rb')
         msg = MIMEBase(main_type, sub_type)
         msg.set_payload(fp.read())
+        email.encoders.encode_base64(msg)
         fp.close()
     
     filename = os.path.basename(file)
@@ -99,6 +101,7 @@ def create_message_with_attachment(
     msg.add_header('Content-Disposition', 'attachment', filename=filename)
     message.attach(msg)
 
+    #return base64.urlsafe_b64encode(message.as_bytes()).decode()
     return message
 
 
@@ -127,9 +130,10 @@ def send_email(msg):
 
     with smtplib.SMTP_SSL("smtp.gmail.com", config.port, context=context) as server:
         server.login(config.user_name, config.password)
-        print(server)
-
+        
+        print('Sending email...')
         server.sendmail(config.user_name, config.user_name, msg=msg.as_string())
+        print('Message sent')
 
 def main():
     print(config.user_name)
