@@ -9,7 +9,7 @@ EXPAND_BOTH = EVAS_HINT_EXPAND, EVAS_HINT_EXPAND
 class MainWindow(StandardWindow):
      
     def __init__(self):
-        StandardWindow.__init__(self, "ex1", "Hello Elementary", size=(300, 200))
+        StandardWindow.__init__(self, "ex1", "Hello Elementary", size=(640, 480))
         self.callback_delete_request_add(lambda o: elm.exit())
 
         ourLabel = Label(self)
