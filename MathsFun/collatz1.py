@@ -10,7 +10,7 @@ def collatz(n, res):
 
     if (n % 2) == 0:  # Even
         collatz(n // 2, res)
-    else:             # Odd
+    else:
         collatz(3*n + 1, res)
 
 
