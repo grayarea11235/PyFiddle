@@ -2,9 +2,15 @@ import sqlite3
 from trackinfo import TrackInfo
 from sqlite3 import OperationalError
 
+class Datastore:
+    pass
+
+class DatastoreFactory:
+    pass
+
 
 # A simple data store built on sqlite
-class Datastore:
+class SQLiteDatastore(Datastore):
 
     def __init__(self, name):
         self.name = name
@@ -73,7 +79,7 @@ class Datastore:
 
 
 if __name__ == '__main__':
-    ds = Datastore('myds.db')
+    ds = SQLiteDatastore('myds.db')
     ds.create_datastore()
     ds.add_file("Sherlock_06_The Sign of Four.mp3")
     # ds.destroy_datastore('myds')
