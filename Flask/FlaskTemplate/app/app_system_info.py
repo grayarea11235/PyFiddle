@@ -16,7 +16,16 @@ class AppSystemInfo:
         #self.properties['instance_relative_config'] = app.instance_relative_config
         self.properties['root_path'] = app.root_path
 
-        self.properties['Platform Info'] = ''
+        self.properties['python_build'] = platform.python_build()
+        self.properties['python_compiler'] = platform.python_compiler()
+        self.properties['python_branch'] = platform.python_branch()
+        #self.properties['python_implementtion'] = platform.python_implemention()
+        self.properties['python_revision'] = platform.python_revision()
+        self.properties['python_version'] = platform.python_version()
+        self.properties['python_version_tuple'] = platform.python_version_tuple()
+ 
+
+        #self.properties['Platform Info'] = ''
         self.properties['platform_machine'] = platform.machine()
         self.properties['platform_version'] = platform.version()
         self.properties['platform_node'] = platform.node()
