@@ -56,7 +56,7 @@ multidict==4.5.2
 nbconvert==5.5.0
 nbformat==4.4.0
 notebook>=6.1.5
-numpy==1.17.3
+numpy==1.21.0
 oauthlib==3.0.1
 packaging==20.8
 pandocfilters==1.4.2
