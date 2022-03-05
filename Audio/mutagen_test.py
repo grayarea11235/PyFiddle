@@ -7,6 +7,7 @@ from os import walk
 
 from peewee import Model
 from peewee import CharField
+from peewee import FloatField
 from peewee import SqliteDatabase
 
 import sqlite3
@@ -14,9 +15,16 @@ import sqlite3
 
 db = SqliteDatabase('test.db')
 
+# Object for a title
+class Title(Model):
+    pass
+
+
 class AudioFile(Model):
     file_name = CharField()
-
+    length = FloatField()
+    type = CharField()
+    
     class Meta:
         database = db
 
@@ -63,8 +71,13 @@ def scan_dir(start_path):
 
                 if isinstance(f, MP3):
                     print('FOUND AN MP3 : {info}'.format(info=print_MPEGInfo(f.info)))
+                    new_record.length = f.info.length
+                    new_record.type = 'MP3'
                 elif isinstance(f, MP4):
-                    print('FOUND AN MP4 : {info}'.format(info=f.info.pprint()))
+                    print('FOUND AN MP4 {file_name}: {info}'.format(file_name=file_name, info=f.info.pprint()))
+                    #print(f.info.MP4Chatpers)
+                    new_record.length = f.info.length
+                    new_record.type = 'MP4'
                 else:
                     print(type(f))
 
