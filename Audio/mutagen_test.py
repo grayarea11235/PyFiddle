@@ -28,7 +28,8 @@ class AudioFile(Model):
     class Meta:
         database = db
 
-
+        
+LOCAL_TEST_DIR = '/home/cpd/Downloads/pilgrim_201909/'
 TEST_DIR = '/media/cpd/8067-3833/Audiobooks/'
 TEST_FILE = 'Richard P. Feynman - The Pleasure of Finding Things Out Audiobook.mp3'
 
@@ -86,7 +87,8 @@ def scan_dir(start_path):
 
 
 def main():
-    scan_dir(TEST_DIR)
+#    scan_dir(TEST_DIR)
+    scan_dir(LOCAL_TEST_DIR)
 
 
     file = path.join(TEST_DIR, TEST_FILE)
