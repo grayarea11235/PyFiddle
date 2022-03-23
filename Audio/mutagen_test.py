@@ -1,6 +1,7 @@
 from mutagen import File
 from mutagen.mp3 import MP3
 from mutagen.mp4 import MP4
+from mutagen.ogg import OggFileType
 
 from os import path
 from os import walk
@@ -79,6 +80,9 @@ def scan_dir(start_path):
                     #print(f.info.MP4Chatpers)
                     new_record.length = f.info.length
                     new_record.type = 'MP4'
+                elif isinstance(f, OggFileType):
+                    new_record.length = f.info.length
+                    new_record.type = 'OGG'
                 else:
                     print(type(f))
 
