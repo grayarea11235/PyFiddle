@@ -30,7 +30,9 @@ class AudioFile(Model):
         database = db
 
         
-LOCAL_TEST_DIR = '/home/cpd/Downloads/pilgrim_201909/'
+#LOCAL_TEST_DIR = '/home/cpd/Downloads/pilgrim_201909/'
+LOCAL_TEST_DIR = '/media/cpd/1233-621A1/Audiobooks/'
+
 TEST_DIR = '/media/cpd/8067-3833/Audiobooks/'
 TEST_FILE = 'Richard P. Feynman - The Pleasure of Finding Things Out Audiobook.mp3'
 
