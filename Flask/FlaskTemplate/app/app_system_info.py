@@ -1,11 +1,14 @@
 import sys
 import platform
 import flask
+import datetime
 
 
 class AppSystemInfo:
     def __init__(self, app):
         self.properties = dict()
+        current_time = datetime.datetime.now().isoformat()
+        self.properties['current_time'] = curent_time
         self.properties['python_executable'] = sys.executable
         self.properties['flask_version'] = flask.__version__
         self.properties['import_name'] = app.import_name

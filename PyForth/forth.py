@@ -34,8 +34,24 @@ class Forth:
         while not quit:
             input('# ')
 
+    def load_file(self, file_name):
+        f = open('./test1.fs', mode = 'r')
+
+        s = f.read()
+        print(s)
+        f.close()
+
+        return s
+
+
+def get_next():
+    pass
+
+
 def main():
     forth = Forth()
+
+    input = forth.load_file('./test1.fs')
 
     forth.run()
 
