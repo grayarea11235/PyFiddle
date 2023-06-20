@@ -5,6 +5,7 @@ gi.require_version('Gst', '1.0')
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gst, Gtk
 
+
 #
 # Currently this is jsut a simpel audio player for gstreamer
 #
@@ -24,13 +25,38 @@ class Player(object):
         bus.connect("message", self.on_message)
 
         
+    def _dump_obj(self, o):
+        #dir_o = dir(o)
+        print(type(o))
+        for i in dir(o):
+            #if callable(i) == True:
+            print('\t' + i)
+            a = getattr(o, 'getter')
+            print('***** ' + str(type(a("test"))))
+            print(type(a))
+            print('\t\t' + str(callable(a)) + ' ' + str(a))
+        #print(dir_o)
+
+
     def on_message(self, bus, message):
 #        print("on_message")
         msg_type = message.type
         print(msg_type)
 
         if msg_type == Gst.MessageType.EOS:
+            print(Gst.Message.timestamp)
+            print(Gst.Message.src)
+
             print('EOS!!!')
+
+        if msg_type == Gst.MessageType.INFO:
+            print('INFO got')
+            print(Gst.Message.timestamp)
+            print(Gst.Message.src)
+
+        if msg_type == Gst.MessageType.TAG:
+            self._dump_obj(Gst.Message.timestamp)
+            self._dump_obj(Gst.Message.src)
 
             
     def set_file(self, file):
@@ -50,6 +76,11 @@ class Player(object):
 
     def stop(self):
         self._player.set_state(Gst.State.NULL)
+
+# Create thread here
+def init_thread():
+    pass
+
 
 
 if __name__ == '__main__':
